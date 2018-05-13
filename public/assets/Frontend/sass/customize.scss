@@ -1,0 +1,57 @@
+$color-xanh:#005582;
+/*ABOUT*/
+.wrap-content-about ul{margin-bottom:15px; padding-left:15px}
+.wrap-content-about ul li{list-style: disc}
+
+.choosing-area .sec-title h1{font-size:22px;}
+
+/*CHI NHANH*/
+.branch{
+  padding:80px 0;
+  div.title{
+    margin-bottom:30px;
+    h2{
+      font-size:24px;
+      text-transform: uppercase;
+      padding-bottom:15px;
+      font-weight:600;
+    }
+    span.border{
+      display: block;
+      width:70px;
+      height:2px;
+      background:#f7f7f7;
+
+    }
+  }
+}
+.left-wrapper{
+  .info{
+    img.logo{
+      margin-bottom:15px;
+    }
+    select{
+      margin-bottom:10px;
+    }
+  }
+}
+.right-wrapper{
+  .map-content{
+    .input-group-addon{
+      padding:0;
+      border:none;
+      button{
+        border-left:none;
+        background:$color-xanh;
+        padding:8px 16px;
+        color:white;
+        border-radius:0 4px 4px 0;
+        box-shadow:none;
+
+      }
+    }
+    #map-canvas{
+      height:450px
+    }
+  }
+}

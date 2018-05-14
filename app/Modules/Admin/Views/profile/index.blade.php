@@ -1,4 +1,4 @@
-@extends('Admin::layouts.main-layout')
+@extends('Admin::layouts.default')
 
 @section('title','Profile')
 
@@ -46,7 +46,7 @@
 
                         </div>
                         <div class="tab-pane fade" id="changePass">
-                            {{Form::open(['url' =>['/admin/test'], 'class' =>'form-changepass'  ] )}}
+                            {{Form::open(['route' =>['admin.profile.post'], 'class' =>'form-changepass'  ] )}}
                             <div class="form-group">
                                 <label for="old_password">Old Password</label>
                                 {{Form::password('old_password', ['class'=>'form-control', 'id' =>'old_password' ])}}

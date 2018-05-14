@@ -2,6 +2,5 @@
 return [
   'modules' => [
     'Admin',
-      'Frontend'
   ]
 ];

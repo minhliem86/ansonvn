@@ -20,6 +20,8 @@ class CreateBranchsTable extends Migration
             $table->string('opentime')->nullable();
             $table->string('hotline')->nullable();
             $table->string('map')->nullable();
+            $table->boolean('status')->default(1);
+            $table->tinyInteger('order')->default(1);
 
             $table->timestamps();
         });

@@ -9,4 +9,9 @@ class Category extends Model
     public $table = 'categories';
 
     protected $guarded = ['id'];
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 }

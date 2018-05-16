@@ -17,10 +17,12 @@ class ProductController extends Controller
 {
     protected $_original;
     protected $_thumbnail;
+    protected $_removePath;
     protected $product;
     protected $category;
     protected $common;
     protected $photo;
+
 
     public function __construct(ProductRepository $product, CommonRepository $common, PhotoRepository $photo, CategoriesRepository $category)
     {
@@ -30,6 +32,7 @@ class ProductController extends Controller
         $this->photo = $photo;
         $this->_original = env('ORIGINAL_PATH');
         $this->_thumbnail = env('THUMBNAIL_PATH');
+        $this->_removePath = env('REMOVE_PATH');
     }
 
     /**
@@ -112,30 +115,32 @@ class ProductController extends Controller
 
         $product = $this->product->create($data);
 
-//        $sub_photo = $request->file('thumb-input');
-//        if($sub_photo[0]){
-//            $data_photo = [];
-//            foreach($sub_photo as $thumb){
-//                $bigSize = $this->common->uploadImage($request, $thumb, $this->_original_path,$resize = false,null,null, base_path($this->_removePath));
-//                $smallsize = $this->common->createThumbnail($bigSize,$this->_thumbnail_path,350, 350, base_path($this->_removePath));
-//                $thumbsize = $this->common->createThumbnail($bigSize,$this->_thumbnail_path,85, 85, base_path($this->_removePath));
-//
-//                $order = $this->photo->getOrder();
-//                $filename = $this->common->getFileName($bigSize);
-//                $data = new \App\Models\Photo(
-//                    [
-//                        'img_url' => $smallsize,
-//                        'thumb_url' => $thumbsize,
-//                        'big_url' => $bigSize,
-//                        'order'=>$order,
-//                        'filename' => $filename,
-//                    ]
-//                );
-//                array_push($data_photo, $data);
-//            }
-//
-//            $product->photos()->saveMany($data_photo);
-//        }
+        if($request->hasFile('thumb-input'))
+        {
+            $sub_photo = $request->file('thumb-input');
+            if($sub_photo[0]){
+                $data_photo = [];
+                foreach($sub_photo as $thumb){
+                    $bigSize = $this->common->uploadImage($request, $thumb, $this->_original,$resize = false,null,null, base_path($this->_removePath));
+                    $smallsize = $this->common->createThumbnail($bigSize,$this->_thumbnail,350, 350, base_path($this->_removePath));
+                    $thumbsize = $this->common->createThumbnail($bigSize,$this->_thumbnail,85, 85, base_path($this->_removePath));
+
+                    $order = $this->photo->getOrder();
+                    $filename = $this->common->getFileName($bigSize);
+                    $data = new \App\Models\Photo(
+                        [
+                            'img_url' => $smallsize,
+                            'thumb_url' => $thumbsize,
+                            'order'=>$order,
+                            'filename' => $filename,
+                        ]
+                    );
+                    array_push($data_photo, $data);
+                }
+
+                $product->photos()->saveMany($data_photo);
+            }
+        }
 
 //        if($request->has('seo_checking')){
 //            if($request->has('meta_img')){
@@ -199,6 +204,51 @@ class ProductController extends Controller
         ];
 
         $product = $this->product->update($data, $id);
+
+        if($request->hasFile('thumb-input'))
+        {
+            $sub_photo = $request->file('thumb-input');
+            if($sub_photo[0]){
+                $data_photo = [];
+                foreach($sub_photo as $thumb){
+                    $bigSize = $this->common->uploadImage($request, $thumb, $this->_original,$resize = false,null,null, base_path($this->_removePath));
+                    $smallsize = $this->common->createThumbnail($bigSize,$this->_thumbnail,350, 350, base_path($this->_removePath));
+                    $thumbsize = $this->common->createThumbnail($bigSize,$this->_thumbnail,85, 85, base_path($this->_removePath));
+
+                    $order = $this->photo->getOrder();
+                    $filename = $this->common->getFileName($bigSize);
+                    $data = new \App\Models\Photo(
+                        [
+                            'img_url' => $smallsize,
+                            'thumb_url' => $thumbsize,
+                            'order'=>$order,
+                            'filename' => $filename,
+                        ]
+                    );
+                    array_push($data_photo, $data);
+                }
+
+                $product->photos()->saveMany($data_photo);
+            }
+        }
+
+//        if($request->has('seo_checking')){
+//            $img_meta = $this->common->getPath($request->input('meta_img'));
+//
+//            $data_seo = [
+//                'meta_keyword' => $request->input('keywords'),
+//                'meta_description' => $request->input('description'),
+//                'meta_img' => $img_meta,
+//            ];
+//
+//            if(!$request->has('meta_id')){
+//                $product->metas()->save(new \App\Models\Meta($data_seo));
+//            }else{
+//                \DB::table('metables')->where('id',$request->input('meta_id'))->update($data_seo);
+//            }
+//        }
+
+
 
         return redirect()->route('admin.product.index')->with('success', 'Updated !');
     }
@@ -283,31 +333,28 @@ class ProductController extends Controller
     /* REMOVE CHILD PHOTO */
     public function AjaxRemovePhoto(Request $request)
     {
-        if (!$request->ajax()) {
+        if(!$request->ajax()){
             abort('404', 'Not Access');
-        } else {
-            $id = $request->input('id_photo');
+        }else{
+            $id = $request->input('key');
             $this->photo->delete($id);
-            return response()->json([
-                'mes' => 'Deleted',
-                'error' => false,
-            ], 200);
+            return response()->json(['success'],200);
         }
     }
 
     /* UPDATE CHILD PHOTO */
     public function AjaxUpdatePhoto(Request $request)
     {
-        if (!$request->ajax()) {
+        if(!$request->ajax()){
             abort('404', 'Not Access');
-        } else {
+        }else{
             $id = $request->input('id_photo');
             $order = $request->input('value');
-            $photo = $this->photo->update(['order' => $order], $id);
+            $photo = $this->photo->update(['order'=>$order], $id);
 
             return response()->json([
                 'mes' => 'Update Order',
-                'error' => false,
+                'error'=> false,
             ], 200);
         }
     }

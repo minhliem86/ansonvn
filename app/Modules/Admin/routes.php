@@ -67,6 +67,25 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
             Route::post('product/updateHotProduct', ['as' => 'admin.product.updateHotProduct', 'uses' => 'ProductController@updateHotProduct']);
             Route::resource('product', 'ProductController');
 
+            /*SERVICE*/
+            Route::post('service/deleteAll', ['as' => 'admin.service.deleteAll', 'uses' => 'ServiceController@deleteAll']);
+            Route::post('service/updateStatus', ['as' => 'admin.service.updateStatus', 'uses' => 'ServiceController@updateStatus']);
+            Route::post('service/postAjaxUpdateOrder', ['as' => 'admin.service.postAjaxUpdateOrder', 'uses' => 'ServiceController@postAjaxUpdateOrder']);
+            Route::resource('service', 'ServiceController');
+
+            /*BRANCH*/
+            Route::post('branch/deleteAll', ['as' => 'admin.branch.deleteAll', 'uses' => 'BranchController@deleteAll']);
+            Route::post('branch/updateStatus', ['as' => 'admin.branch.updateStatus', 'uses' => 'BranchController@updateStatus']);
+            Route::post('branch/postAjaxUpdateOrder', ['as' => 'admin.branch.postAjaxUpdateOrder', 'uses' => 'BranchController@postAjaxUpdateOrder']);
+            Route::resource('branch', 'BranchController');
+
+            /*GALLERY*/
+            Route::post('gallery/deleteAll', ['as' => 'admin.gallery.deleteAll', 'uses' => 'GalleryController@deleteAll']);
+            Route::post('gallery/updateStatus', ['as' => 'admin.gallery.updateStatus', 'uses' => 'GalleryController@updateStatus']);
+            Route::post('gallery/postAjaxUpdateOrder', ['as' => 'admin.gallery.postAjaxUpdateOrder', 'uses' => 'GalleryController@postAjaxUpdateOrder']);
+            Route::resource('gallery', 'GalleryController');
+
+
         });
     });
 });

@@ -28,7 +28,7 @@
     <!-- Main styles for this application -->
     <link href="{!! asset('public/assets/admin') !!}/css/style.css" rel="stylesheet">
     <!-- Styles required by this views -->
-
+    @yield('css')
 </head>
 
 <!-- BODY options, add following classes to body to change options

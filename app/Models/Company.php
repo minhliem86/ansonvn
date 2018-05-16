@@ -8,10 +8,9 @@ class Company extends Model
 {
     public $table = "companies";
 
-    protected $primaryKey = 'company_information';
+    protected $primaryKey = 'table_name';
 
     public $incrementing = false;
-
 
     protected $fillable = ['email','address', 'phone', 'map'];
 }

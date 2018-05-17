@@ -1,73 +1,88 @@
 @extends('Admin::layouts.default')
 
-@section('title','CHI NHÁNH')
+@section('title','GALLERY')
+
+@section('css')
+    <style>
+        /* Mimic table appearance */
+        div.album{
+            margin:10px 0;
+        }
+        div#actions{
+            margin-bottom:10px;
+        }
+        div.table {
+            display: table;
+        }
+        div.table .file-row {
+            display: table-row;
+        }
+        div.table .file-row > div {
+            display: table-cell;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+            padding: 8px;
+        }
+        div.table .file-row:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+
+
+        /* The total progress gets shown by event listeners */
+        #total-progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the progress bar when finished */
+        #previews .file-row.dz-success .progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the delete button initially */
+        #previews .file-row .delete {
+            display: none;
+        }
+
+        /* Hide the start and cancel buttons and show the delete button */
+
+        #previews .file-row.dz-success .start,
+        #previews .file-row.dz-success .cancel {
+            display: none;
+        }
+        #previews .file-row.dz-success .delete {
+            display: block;
+        }
+    </style>
+@stop
 
 @section('content')
     <div class="row">
         <div class="col">
             <div class="card">
-                {!! Form::open(['route'=>'admin.branch.store', 'class' =>'form']) !!}
+                {!! Form::open(['route'=>'admin.gallery.store', 'class' =>'form', 'files' => true]) !!}
                 <div class="card-header">
-                    <strong>CHI NHÁNH</strong>
+                    <strong>GALLERY</strong>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Chi Nhánh</label>
+                        <label class="col-md-3 col-form-label" for="name">Tên Album</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" name="title" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Địa chỉ</label>
+                        <label class="col-md-3 col-form-label">Hình Chi Tiết (opt)</label>
                         <div class="col-md-9">
-                            {!! Form::text('address', old('address'), ['class'=>'form-control', 'required']) !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Phone</label>
-                        <div class="col-md-9">
-                            {!! Form::text('phone', old('phone'), ['class'=>'form-control', 'required']) !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Thời gian làm việc</label>
-                        <div class="col-md-9">
-                            {!! Form::text('opentime', old('opentime'), ['class'=>'form-control', 'required']) !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Hotline</label>
-                        <div class="col-md-9">
-                            {!! Form::text('hotline', old('hotline'), ['class'=>'form-control', 'required']) !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Google Map</label>
-                        <div class="col-md-9">
-                            {!! Form::text('map', old('map'), ['class'=>'form-control', 'required']) !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" >Hình đại diện:</label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                            <span class="input-group-btn">
-                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-white">
-                                    <i class="fa fa-picture-o"></i> Chọn
-                                </a>
-                            </span>
-                                <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                            <div class="photo-container">
+                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
                             </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;">
                         </div>
                     </div>
-                    <!--/.row-->
                 </div>
+
                 <div class="card-footer">
                     <div class="col-md-9 offset-md-3">
                         <a href="{!! url()->previous() !!}" class="btn btn-danger text-white"><i class="fa fa-arrow-left"></i> Back</a>
@@ -84,11 +99,42 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{{asset('public')}}/vendor/laravel-filemanager/js/lfm.js"></script>
     <script src="{{asset('public/assets/admin/js/script.js')}}"></script>
+
+    <!--BT Upload-->
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/css/fileinput.min.css">
+    <script src="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
+    <script src="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
+    <script src="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
+    
+    
     <script>
         const url = "{{url('/')}}"
         init_tinymce(url);
         // BUTTON ALONE
         init_btnImage(url,'#lfm');
+
+        $(document).ready(function(){
+            $("#thumb-input").fileinput({
+                uploadUrl: "{!!route('admin.gallery.store')!!}", // server upload action
+                uploadAsync: true,
+                showUpload: false,
+                showBrowse: false,
+                showCaption: false,
+                showCancel: false,
+                dropZoneEnabled : true,
+                browseOnZoneClick: true,
+                fileActionSettings:{
+                    showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                }
+            })
+        })
 
     </script>
 @stop

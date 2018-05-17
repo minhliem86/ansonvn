@@ -1,6 +1,6 @@
 @extends('Admin::layouts.default')
 
-@section('title','GALLERY')
+@section('title','Khách Liên Hệ')
 
 @section('content')
     @if(Session::has('error'))
@@ -18,12 +18,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="wrap-center">
-                            <a href="{!! route('admin.gallery.create') !!}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Thêm</a>
-                            <button type="button" class="btn btn-warning btn-sm text-white" id="btn-updateOrder"><i class="fa fa-refresh"></i> Cập Nhật Thứ Tự</button>
-                        </div>
                         <div class="wrap-title">
-                            <strong>GALLERY</strong>
+                            <strong>KHÁCH LIÊN HỆ</strong>
                         </div>
                         <div class="wrap-control">
                             <button type="button" class="btn btn-danger btn-sm" id="btn-remove-all"><i class="fa fa-trash"></i> Xóa Chọn</button>
@@ -60,15 +56,16 @@
                 processing: true,
                 serverSide: true,
                 ajax:{
-                    url:  '{!! route('admin.gallery.index') !!}',
+                    url:  '{!! route('admin.contact.index') !!}',
                     data: function(d){
                         d.name = $('input[type="search"]').val();
                     }
                 },
                 columns: [
                     {data: 'id', name: 'id', 'orderable': false, title: '#', visible: false},
-                    {data: 'title', title: 'Gallery'},
-                    {data: 'order', name: 'Sắp xếp', title: 'Sắp xếp'},
+                    {data: 'name', title: 'Tên khách hàng'},
+                    {data: 'phone', title: 'Điện thoại'},
+                    {data: 'email', title: 'Email'},
                     {data: 'status', name: 'Trạng thái', title: 'Trạng Thái'},
                     {data: 'action', name: 'action', 'orderable': false}
                 ],
@@ -84,7 +81,7 @@
                         alertify.confirm('You can not undo this action. Are you sure ?', function(e){
                             if(e){
                                 $.ajax({
-                                    'url':"{!!route('admin.gallery.deleteAll')!!}",
+                                    'url':"{!!route('admin.contact.deleteAll')!!}",
                                     'data' : {arr: data},
                                     'type': "POST",
                                     'success':function(result){
@@ -100,25 +97,7 @@
                         })
                     })
 
-                    $('#btn-updateOrder').click(function(){
-                        var rows_order = table_api.rows().data();
-                        var data_order = {};
-                        $('input[name="order"]').each(function(index){
-                            var id = $(this).data('id');
-                            var va = $(this).val();
-                            data_order[id] = va;
-                        });
-                        $.ajax({
-                            url: '{{route("admin.gallery.postAjaxUpdateOrder")}}',
-                            type:'POST',
-                            data: {data: data_order },
-                            success: function(rs){
-                                if(rs.code == 200){
-                                    location.reload(true);
-                                }
-                            }
-                        })
-                    })
+
                     $('table.table').on('change','input[name=status]', function(){
                         var value = 0;
                         if($(this).is(':checked')){
@@ -127,7 +106,7 @@
                         const id_item = $(this).data('id');
                         console.log(id_item);
                         $.ajax({
-                            url: "{{route('admin.gallery.updateStatus')}}",
+                            url: "{{route('admin.contact.updateStatus')}}",
                             type : 'POST',
                             data: {value: value, id: id_item},
                             success: function(data){

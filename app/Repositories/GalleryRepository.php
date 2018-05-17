@@ -3,13 +3,13 @@ namespace App\Repositories;
 
 use App\Repositories\Contract\RestfulInterface;
 use App\Repositories\Eloquent\BaseRepository;
-use App\Models\Contact;
+use App\Models\Gallery;
 
-class ContactRepository extends BaseRepository implements RestfulInterface{
+class GalleryRepository extends BaseRepository implements RestfulInterface{
 
     public function getModel()
     {
-        return Contact::class;
+        return Gallery::class;
     }
     // END
 

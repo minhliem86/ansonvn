@@ -85,6 +85,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
             Route::post('gallery/postAjaxUpdateOrder', ['as' => 'admin.gallery.postAjaxUpdateOrder', 'uses' => 'GalleryController@postAjaxUpdateOrder']);
             Route::resource('gallery', 'GalleryController');
 
+            /*CONTACT*/
+            Route::post('contact/deleteAll', ['as' => 'admin.contact.deleteAll', 'uses' => 'ContactController@deleteAll']);
+            Route::post('contact/updateStatus', ['as' => 'admin.contact.updateStatus', 'uses' => 'ContactController@updateStatus']);
+            Route::resource('contact', 'ContactController');
 
         });
     });

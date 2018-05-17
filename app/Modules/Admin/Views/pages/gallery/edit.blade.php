@@ -83,6 +83,14 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{{asset('public')}}/vendor/laravel-filemanager/js/lfm.js"></script>
     <script src="{{asset('public/assets/admin/js/script.js')}}"></script>
+
+    <!--BT Upload-->
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/css/fileinput.min.css">
+    <script src="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
+    <script src="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
+    <script src="{{asset('/public/assets/admin')}}/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
+
+
     <script>
         const url = "{{url('/')}}"
         init_tinymce(url);
@@ -96,6 +104,51 @@
                 $(this).val(0);
             }
         })
+
+        $(document).ready(function(){
+            $("#thumb-input").fileinput({
+                uploadUrl: "{!!route('admin.gallery.store')!!}", // server upload action
+                uploadAsync: false,
+                showUpload: false,
+                showCancel: false,
+                showCaption: false,
+                dropZoneEnabled : true,
+                showBrowse: false,
+                overwriteInitial: false,
+                browseOnZoneClick: true,
+                fileActionSettings:{
+                    showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                initialPreview: [
+                    @foreach($inst->photos as $photo)
+                        "{!!asset($photo->thumb_url)!!}",
+                    @endforeach
+                ],
+                initialPreviewAsData: true,
+                initialPreviewFileType: 'image',
+                initialPreviewConfig: [
+                        @foreach($inst->photos as $item_photo)
+                    {'url': '{!! route("admin.gallery.AjaxRemovePhoto") !!}', key: "{!! $item_photo->id !!}", caption: "{!! $item_photo->filename !!}"},
+                    @endforeach
+                ],
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                },
+            });
+            /*CHANGE STATUS*/
+            $(document).on('change', 'input[name=status]', function(){
+                if($(this).prop('checked')){
+                    $(this).val(1);
+                }else{
+                    $(this).val(0);
+                }
+            })
+        })
+
 
     </script>
 @stop

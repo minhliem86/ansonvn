@@ -166,7 +166,8 @@ return [
         Codingo\Dropzoner\DropzonerServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        App\Modules\ModulesServiceProvider::class
+        App\Modules\ModulesServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class
 
     ],
 

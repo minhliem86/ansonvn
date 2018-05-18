@@ -9,7 +9,7 @@ class ComposerServiceProvider extends ServiceProvider{
     /*BOOT FUNCTION*/
     public function boot()
     {
-
+        view()->composer('Frontend::layouts.header','App\ViewComposers\MenuComposer');
     }
 
     /*REGISTER FUNCTION*/

@@ -43,4 +43,14 @@
 .right-wrapper .map-content #map-canvas {
   height: 450px; }
 
+/*GALLERY*/
+.each-gallery {
+  margin-bottom: 15px; }
+  .each-gallery figure {
+    cursor: pointer; }
+    .each-gallery figure figcaption {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+
 /*# sourceMappingURL=customize.css.map */

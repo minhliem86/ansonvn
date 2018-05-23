@@ -10,6 +10,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- For IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- meta CSRF -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- master stylesheet -->
 	<link rel="stylesheet" href="{{asset('public/assets/Frontend')}}/css/style.css">
 	@yield('css')

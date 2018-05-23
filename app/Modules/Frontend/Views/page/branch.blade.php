@@ -78,7 +78,7 @@
                     if (status == google.maps.GeocoderStatus.OK) {
                         var latitude = results[0].geometry.location.lat();
                         var longitude = results[0].geometry.location.lng();
-                        MapRoute({!! $data_map[0] !!},{!! $data_map[1] !!},latitude,longitude);
+                        MapRoute(latitude,longitude,{!! $data_map[0] !!},{!! $data_map[1] !!});
                     }
                 });
             })

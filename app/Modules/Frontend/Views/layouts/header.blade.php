@@ -73,6 +73,7 @@
                                         <li><a href="{{route('homepage')}}">Cơ Khí Chế Tạo Máy</a></li>
                                     </ul>
                                 </li>
+                                <li class="{{LP_lib::setActive(1,'thu-vien-hinh-anh','current')}}"><a href="{{route('f.getGallery')}}">Hình Ảnh</a></li>
                                 <li class=" dropdown"><a href="">Chi Nhánh</a>
                                     @if(!$branch->isEmpty())
                                         <ul>

@@ -51,7 +51,20 @@ $color-xanh:#005582;
       }
     }
     #map-canvas{
-      height:450px
+      height:450px;
+    }
+  }
+}
+
+/*GALLERY*/
+.each-gallery{
+  margin-bottom:15px;
+  figure{
+    cursor:pointer;
+    figcaption{
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

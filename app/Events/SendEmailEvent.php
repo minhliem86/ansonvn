@@ -15,11 +15,11 @@ class SendEmailEvent extends Event
      *
      * @return void
      */
-     protected $layout;
-     protected $arrayData;
-     protected $from;
-     protected $to;
-     protected $subject;
+     public $layout;
+     public $arrayData;
+     public $from;
+     public $to;
+     public $subject;
     public function __construct($layout, $arrayData, $from, $to, $subject)
     {
         $this->layout = $layout;

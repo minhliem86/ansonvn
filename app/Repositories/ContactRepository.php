@@ -1,17 +1,16 @@
 <?php
 namespace App\Repositories;
 
+use App\Repositories\Contract\RestfulInterface;
+use App\Repositories\Eloquent\BaseRepository;
 use App\Models\Contact;
 
-class ContactRepository{
-  protected $contact;
+class ContactRepository extends BaseRepository implements RestfulInterface{
 
-  public function __construct(Contact $contact)
-  {
-    $this->contact = $contact;
-  }
+    public function getModel()
+    {
+        return Contact::class;
+    }
+    // END
 
-  public function postRegister($data){
-    return $this->contact->create($data);
-  }
 }

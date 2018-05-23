@@ -1,5 +1,5 @@
-function MapRoute(lat, lng) {
-    var pointA = new google.maps.LatLng(10.0044274,105.806828),
+function MapRoute(latA, lngA ,lat, lng) {
+    var pointA = new google.maps.LatLng(latA,lngA),
         pointB = new google.maps.LatLng(lat, lng),
         myOptions = {
             zoom: 7,

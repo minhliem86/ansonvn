@@ -46,74 +46,44 @@
               <div class="col-md-4 col-sm-7 col-xs-12">
                   <div class="contact-details">
                       <h2>Thông tin</h2>
+                      @if(!$branch->isEmpty())
                       <div class="contact-info-carousel owl-theme owl-carousel">
-                          <div class="item">
-                              <div class="contact-details-title">
-                                  <h5>Văn phòng chính</h5>
-                              </div>
-                              <ul class="contact-info">
-                                  <li>
-                                      <div class="icon-box">
-                                          <span class="flaticon-signs"></span>
-                                      </div>
-                                      <div class="text-box">
-                                          <p><span>Địa chỉ:</span> 92 Nguyễn Hữu Cảnh<br>Phường 22, Quận Bình Thạnh TP.Hồ Chí Minh</p>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div class="icon-box">
-                                          <span class="flaticon-email-envelope-back-symbol-on-phone-screen"></span>
-                                      </div>
-                                      <div class="text-box">
-                                          <p><span>Liên lạc:</span> (84.8) 225 344 77 - (84.8) 225 344 88  <br>bds@ansonvn.com</p>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div class="icon-box">
-                                          <span class="flaticon-clock-1"></span>
-                                      </div>
-                                      <div class="text-box">
-                                        <p><span>Thứ Hai - Thứ Sáu :</span> 08.00 - 17.00</p>
-                                        <p><span>Thứ Bảy :</span> 08.00 - 12.00</p>
-                                      </div>
-                                  </li>
+                          @foreach($branch as $item_branch)
+                              <div class="item">
+                                  <div class="contact-details-title">
+                                      <h5>{!! $item_branch->title !!}</h5>
+                                  </div>
+                                  <ul class="contact-info">
+                                      <li>
+                                          <div class="icon-box">
+                                              <span class="flaticon-signs"></span>
+                                          </div>
+                                          <div class="text-box">
+                                              <p><span>Địa chỉ:</span> {!! $item_branch->address !!}</p>
+                                          </div>
+                                      </li>
+                                      <li>
+                                          <div class="icon-box">
+                                              <span class="flaticon-email-envelope-back-symbol-on-phone-screen"></span>
+                                          </div>
+                                          <div class="text-box">
+                                              <p><span>Liên lạc:</span> {!! $item_branch->phone !!}  <br>{!! $item_branch->email !!}</p>
+                                          </div>
+                                      </li>
+                                      <li>
+                                          <div class="icon-box">
+                                              <span class="flaticon-clock-1"></span>
+                                          </div>
+                                          <div class="text-box">
+                                              {!! $item_branch->opentime !!}
+                                          </div>
+                                      </li>
 
-                              </ul>
-                          </div>
-                          <div class="item">
-                              <div class="contact-details-title">
-                                  <h5>OBIDO Cần Thơ</h5>
+                                  </ul>
                               </div>
-                              <ul class="contact-info">
-                                  <li>
-                                      <div class="icon-box">
-                                          <span class="flaticon-signs"></span>
-                                      </div>
-                                      <div class="text-box">
-                                          <p><span>Địa chỉ:</span> G8-66 Bùi Quang Trinh<br>Phú Thứ, Cái Răng, Cần Thơ</p>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div class="icon-box">
-                                          <span class="flaticon-email-envelope-back-symbol-on-phone-screen"></span>
-                                      </div>
-                                      <div class="text-box">
-                                          <p><span>Liên lạc:</span> (0292) 6507 788  <br>bds@ansonvn.com</p>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div class="icon-box">
-                                          <span class="flaticon-clock-1"></span>
-                                      </div>
-                                      <div class="text-box">
-                                          <p><span>Thứ Hai - Thứ Sáu :</span> 08.00 - 17.00</p>
-                                          <p><span>Thứ Bảy :</span> 08.00 - 12.00</p>
-                                      </div>
-                                  </li>
-
-                              </ul>
-                          </div>
+                          @endforeach
                       </div>
+                      @endif
                       {{-- <div class="contact-social-links">
                           <ul>
                               <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>

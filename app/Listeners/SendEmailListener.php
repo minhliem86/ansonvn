@@ -29,7 +29,7 @@ class SendEmailListener
     public function handle(SendEmailEvent $event)
     {
       Mail::send($event->layout, $event->arrayData, function ($m) use ($event) {
-          $m->from($event->from, 'No Reply');
+          $m->from($event->from, 'AN SƠN VN');
           $m->to($event->to)->subject($event->subject);
       });
     }

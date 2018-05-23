@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f220dbee4ac375d7e2c09793bc5afc3d",
+    "content-hash": "f4641cfdea29d46e373f2b7323de542c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1007,16 +1007,16 @@
         },
         {
             "name": "liemphan/modules",
-            "version": "1.2",
+            "version": "1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/minhliem86/modules.git",
-                "reference": "53c841d206bbc25c289bca59233c0ca6c9383945"
+                "reference": "31302de75f14c4525ea5758660f4cb01aceaebaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minhliem86/modules/zipball/53c841d206bbc25c289bca59233c0ca6c9383945",
-                "reference": "53c841d206bbc25c289bca59233c0ca6c9383945",
+                "url": "https://api.github.com/repos/minhliem86/modules/zipball/31302de75f14c4525ea5758660f4cb01aceaebaf",
+                "reference": "31302de75f14c4525ea5758660f4cb01aceaebaf",
                 "shasum": ""
             },
             "require": {
@@ -1069,7 +1069,7 @@
                 }
             ],
             "description": "Modules for Laravel Framework",
-            "time": "2018-03-04T06:22:25+00:00"
+            "time": "2018-05-14T08:36:11+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -1273,16 +1273,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.27.0",
+            "version": "1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "ef81c39b67200dcd7401c24363dcac05ac3a4fe9"
+                "reference": "00149d95fc91ef10f19d3a66889bc3bb7500fa7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ef81c39b67200dcd7401c24363dcac05ac3a4fe9",
-                "reference": "ef81c39b67200dcd7401c24363dcac05ac3a4fe9",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/00149d95fc91ef10f19d3a66889bc3bb7500fa7b",
+                "reference": "00149d95fc91ef10f19d3a66889bc3bb7500fa7b",
                 "shasum": ""
             },
             "require": {
@@ -1317,7 +1317,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-04-23T09:02:57+00:00"
+            "time": "2018-05-18T15:26:18+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1940,7 +1940,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.4.9",
+            "version": "v3.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2994,12 +2994,12 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
                 "shasum": ""
             },

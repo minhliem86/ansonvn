@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->string('img_url')->nullable();
+            $table->boolean('status')->default(1);
+            $table->tinyInteger('order')->default(1);
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

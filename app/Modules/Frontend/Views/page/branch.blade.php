@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="title">
-                        <h2>Chi Nhánh OBIDO Cần Thơ</h2>
+                        <h2>{!! $branch->title !!}</h2>
                         <span class="border"></span>
                     </div>
                 </div>
@@ -26,12 +26,12 @@
                 <div class="col-md-5 ">
                     <div class="left-wrapper">
                         <div class="info">
-                            <img src="{!! asset('public/assets/Frontend') !!}/images/obido-cantho.jpg" class="img-responsive logo" alt="An Sơn">
+                            <img src="{!! asset('public/uploads/'.$branch->img_url) !!}" class="img-responsive logo" alt="{!! $branch->title !!}">
                             <div class="branch-content">
-                                <p class="info-text"><b>Địa Chỉ:</b> G8-66 Bùi Quang Trinh, Phú Thứ, Cái Răng, Cần Thơ
+                                <p class="info-text"><b>Địa Chỉ:</b> {!! $branch->address !!}
                                 </p>
-                                <p class="info-text"><b>Điện Thoại:</b> 0292 6507 788</p>
-                                <p class="info-text"><b>Email:</b></p>
+                                <p class="info-text"><b>Điện Thoại:</b> {!! $branch->phone !!}</p>
+                                <p class="info-text">{!! $branch->opentime !!}</p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,10 @@
 
     <script>
         $(document).ready(function(){
-            initMap(10.0045672,105.8068612);
+            @php
+                $data_map = explode(',',$branch->map);
+            @endphp
+            initMap({!! $data_map[0] !!},{!! $data_map[1] !!});
             $('button#director').click(function(){
                 var address = $('input[name=from_gmap]').val();
                 $('#map-canvas').empty();
@@ -75,7 +78,7 @@
                     if (status == google.maps.GeocoderStatus.OK) {
                         var latitude = results[0].geometry.location.lat();
                         var longitude = results[0].geometry.location.lng();
-                        MapRoute(latitude,longitude);
+                        MapRoute(latitude,longitude,{!! $data_map[0] !!},{!! $data_map[1] !!});
                     }
                 });
             })

@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
             Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
             //   PORFILE
             Route::get('/profile', ['as' => 'admin.profile.index', 'uses' => 'ProfileController@index']);
+            Route::post('/profile', ['as' => 'admin.profile.post', 'uses' => 'ProfileController@postChangePass']);
 
             /*USER MANAGEMENT*/
             Route::get('user/getData', ['as' => 'admin.user.getData', 'uses' => 'UserManagementController@getData']);
@@ -47,7 +48,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
             Route::post('photo/deleteAll', ['as' => 'admin.photo.deleteAll', 'uses'=>'MultiPhotoController@deleteAll']);
 
             /*CATEGORY*/
-            Route::get('category/getData', ['as' => 'admin.category.getData', 'uses' => 'CategoryController@getData']);
+
             Route::post('category/deleteAll', ['as' => 'admin.category.deleteAll', 'uses' => 'CategoryController@deleteAll']);
             Route::post('category/updateStatus', ['as' => 'admin.category.updateStatus', 'uses' => 'CategoryController@updateStatus']);
             Route::post('category/postAjaxUpdateOrder', ['as' => 'admin.category.postAjaxUpdateOrder', 'uses' => 'CategoryController@postAjaxUpdateOrder']);
@@ -58,7 +59,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
 
 
             /*PRODUCT*/
-            Route::get('product/getData', ['as' => 'admin.product.getData', 'uses' => 'ProductController@getData']);
             Route::post('product/deleteAll', ['as' => 'admin.product.deleteAll', 'uses' => 'ProductController@deleteAll']);
             Route::post('product/postAjaxUpdateOrder', ['as' => 'admin.product.postAjaxUpdateOrder', 'uses' => 'ProductController@postAjaxUpdateOrder']);
             Route::post('product/AjaxRemovePhoto', ['as' => 'admin.product.AjaxRemovePhoto', 'uses' => 'ProductController@AjaxRemovePhoto']);
@@ -66,6 +66,29 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
             Route::post('product/updateStatus', ['as' => 'admin.product.updateStatus', 'uses' => 'ProductController@updateStatus']);
             Route::post('product/updateHotProduct', ['as' => 'admin.product.updateHotProduct', 'uses' => 'ProductController@updateHotProduct']);
             Route::resource('product', 'ProductController');
+
+            /*SERVICE*/
+            Route::post('service/deleteAll', ['as' => 'admin.service.deleteAll', 'uses' => 'ServiceController@deleteAll']);
+            Route::post('service/updateStatus', ['as' => 'admin.service.updateStatus', 'uses' => 'ServiceController@updateStatus']);
+            Route::post('service/postAjaxUpdateOrder', ['as' => 'admin.service.postAjaxUpdateOrder', 'uses' => 'ServiceController@postAjaxUpdateOrder']);
+            Route::resource('service', 'ServiceController');
+
+            /*BRANCH*/
+            Route::post('branch/deleteAll', ['as' => 'admin.branch.deleteAll', 'uses' => 'BranchController@deleteAll']);
+            Route::post('branch/updateStatus', ['as' => 'admin.branch.updateStatus', 'uses' => 'BranchController@updateStatus']);
+            Route::post('branch/postAjaxUpdateOrder', ['as' => 'admin.branch.postAjaxUpdateOrder', 'uses' => 'BranchController@postAjaxUpdateOrder']);
+            Route::resource('branch', 'BranchController');
+
+            /*GALLERY*/
+            Route::post('gallery/deleteAll', ['as' => 'admin.gallery.deleteAll', 'uses' => 'GalleryController@deleteAll']);
+            Route::post('gallery/updateStatus', ['as' => 'admin.gallery.updateStatus', 'uses' => 'GalleryController@updateStatus']);
+            Route::post('gallery/postAjaxUpdateOrder', ['as' => 'admin.gallery.postAjaxUpdateOrder', 'uses' => 'GalleryController@postAjaxUpdateOrder']);
+            Route::resource('gallery', 'GalleryController');
+
+            /*CONTACT*/
+            Route::post('contact/deleteAll', ['as' => 'admin.contact.deleteAll', 'uses' => 'ContactController@deleteAll']);
+            Route::post('contact/updateStatus', ['as' => 'admin.contact.updateStatus', 'uses' => 'ContactController@updateStatus']);
+            Route::resource('contact', 'ContactController');
 
         });
     });

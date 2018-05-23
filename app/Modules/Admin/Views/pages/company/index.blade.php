@@ -1,8 +1,4 @@
-@extends('Admin::layouts.main-layout')
-
-@section('link')
-    <button class="btn btn-primary" onclick="submitForm();">Save</button>
-@stop
+@extends('Admin::layouts.default')
 
 @section('title','Company Information')
 
@@ -18,71 +14,82 @@
     </div>
     @endif
     <div class="row">
-      <div class="col-sm-12">
-        @if(!$inst)
-        <form method="POST" action="{{route('admin.company.index')}}" id="form" role="form" class="form-horizontal form">
-          {{Form::token()}}
-          <div class="form-group">
-            <label class="col-md-2 control-label">Địa chỉ</label>
-            <div class="col-md-10">
-              <input type="text" required="" placeholder="Address" id="address" class="form-control" name="address">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="wrap-title">
+                            <strong>Thông Tin Công Ty</strong>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    @if(!$inst)
+                        <form method="POST" action="{{route('admin.company.index')}}" id="form" role="form" class="form-horizontal form">
+                            {{Form::token()}}
+                            <div class="form-group">
+                                <label class=" control-label">Địa chỉ</label>
+                                    <input type="text" required="" placeholder="Address" id="address" class="form-control" name="address">
+
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label">Email</label>
+                                    <input type="text" required="" placeholder="Email" id="email" class="form-control" name="email">
+
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label">Điện thoại</label>
+                                <input type="text" required="" placeholder="Phone Number" id="phone" class="form-control" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label">Google Map</label>
+                                <input type="text" required="" placeholder="Google Map" id="map" class="form-control" name="map">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit"><i class="fa fa-dot-circle-o"></i> Save</button>
+                            </div>
+
+                        </form>
+                    @else
+                        {{Form::open(['route' =>['admin.company.index'], 'method'=>'PUT', 'class'=>'form form-horizontal'])}}
+                        <div class="form-group">
+                            <label class=" control-label">Địa chỉ</label>
+                                {{Form::text('address',$inst->address,['class'=>'form-control', 'placeholder'=>'Address', 'required'])}}
+
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Email</label>
+                                {{Form::text('email',$inst->email,['class'=>'form-control', 'placeholder'=>'Email', 'required'])}}
+
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Điện thoại</label>
+                                {{Form::text('phone',$inst->phone,['class'=>'form-control', 'placeholder'=>'Phone', 'required'])}}
+
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Google Map</label>
+                            {{Form::text('map',$inst->map,['class'=>'form-control', 'placeholder'=>'Google Map', 'required'])}}
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit"><i class="fa fa-dot-circle-o"></i> Save</button>
+                        </div>
+
+                        {{Form::close()}}
+                    @endif
+
+                </div>
+
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Email</label>
-            <div class="col-md-10">
-              <input type="text" required="" placeholder="Email" id="email" class="form-control" name="email">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Điện thoại</label>
-            <div class="col-md-10">
-              <input type="text" required="" placeholder="Phone Number" id="phone" class="form-control" name="phone">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Bản đồ</label>
-            <div class="col-md-10">
-              <input type="text" required="" placeholder="Map" id="map" class="form-control" name="map">
-            </div>
-          </div>
-        </form>
-        @else
-        {{Form::model($inst,['route' =>['admin.company.index', $inst->id], 'method'=>'PUT', 'class'=>'form form-horizontal'])}}
-          <div class="form-group">
-            <label class="col-md-2 control-label">Địa chỉ</label>
-            <div class="col-md-10">
-              {{Form::text('address',old($inst->address),['class'=>'form-control', 'placeholder'=>'Address', 'required'])}}
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Email</label>
-            <div class="col-md-10">
-              {{Form::text('email',old($inst->email),['class'=>'form-control', 'placeholder'=>'Email', 'required'])}}
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Điện thoại</label>
-            <div class="col-md-10">
-              {{Form::text('phone',old($inst->phone),['class'=>'form-control', 'placeholder'=>'Phone', 'required'])}}
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Bản đồ</label>
-            <div class="col-md-10">
-              {{ Form::text('map',old($inst->map),['class'=>'form-control']) }}
-            </div>
-          </div>
-        {{Form::close()}}
-        @endif
-      </div>
+        </div>
     </div>
 @endsection
 
 @section('script')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{{asset('public')}}/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script src="{{asset('public/assets/admin/dist/js/script.js')}}"></script>
+    <script src="{{asset('public/assets/admin/js/script.js')}}"></script>
     <script>
         const url = "{{url('/')}}"
         init_tinymce(url);

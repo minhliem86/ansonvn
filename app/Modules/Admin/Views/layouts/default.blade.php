@@ -11,11 +11,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <link rel="shortcut icon" href="{!! asset('public/assets/admin') !!}/img/favicon.png">
+    <link rel="shortcut icon" href="{!! asset('public/assets/admin') !!}/img/favicon.ico">
     <title>CoreUI - Admin Template - @yield('title')</title>
 
     <!-- Icons -->
@@ -27,7 +28,7 @@
     <!-- Main styles for this application -->
     <link href="{!! asset('public/assets/admin') !!}/css/style.css" rel="stylesheet">
     <!-- Styles required by this views -->
-
+    @yield('css')
 </head>
 
 <!-- BODY options, add following classes to body to change options
@@ -89,6 +90,16 @@
 <!-- CoreUI main scripts -->
 
 <script src="{!! asset('public/assets/admin') !!}/js/app.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    })
+</script>
 
 <!-- Plugins and scripts required by this views -->
 

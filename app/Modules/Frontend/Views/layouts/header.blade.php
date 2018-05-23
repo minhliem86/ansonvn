@@ -49,15 +49,22 @@
                                 <li class="{{LP_lib::setActive(1,'','current')}}"><a href="{{route('homepage')}}">Trang chủ</a></li>
                                 <li class="{{LP_lib::setActive(1,'gioi-thieu','current')}}"><a href="{{route('f.getGioithieu')}}">Giới thiệu</a></li>
                                 <li class="dropdown"><a href="{{route('homepage')}}">Sản phẩm</a>
+                                    @if(!$cate_menu->isEmpty())
                                     <ul>
-                                        <li><a href="{{route('homepage')}}">Sơn Ngoại Thất</a></li>
-                                        <li><a href="{{route('homepage')}}">Sơn Nội Thất</a></li>
-                                        <li><a href="{{route('homepage')}}">Chất Chống Thấm</a></li>
-                                        <li><a href="{{route('homepage')}}">Bột Cao Cấp Ngoài Trời</a></li>
-                                        <li><a href="{{route('homepage')}}">Bột Cao Cấp Trong Nhà</a></li>
+                                        @foreach($cate_menu as $item_cate)
+                                        <li><a href="{{route('homepage')}}">{!! $item_cate->name !!}</a></li>
+                                        @endforeach
                                     </ul>
+                                    @endif
                                 </li>
                                 <li class="dropdown"><a href="{{route('homepage')}}">Dịch Vụ</a>
+                                    @if(!$services->isEmpty())
+                                        <ul>
+                                            @foreach($services as $item_service)
+                                                <li><a href="{{route('homepage')}}">{!! $item_service->name !!}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                     <ul>
                                         <li><a href="{{route('homepage')}}">Thi Công Tòa Nhà Văn Phòng</a></li>
                                         <li><a href="{{route('homepage')}}">Thi Công Công Trình Thể Thao</a></li>
@@ -66,10 +73,15 @@
                                         <li><a href="{{route('homepage')}}">Cơ Khí Chế Tạo Máy</a></li>
                                     </ul>
                                 </li>
-                                <li class=" dropdown"><a href="{{route('f.getChinhanh')}}">Chi Nhánh</a>
-                                    <ul>
-                                        <li><a href="{{route('f.getChinhanh')}}">OBIDO Cần Thơ</a></li>
-                                    </ul>
+                                <li class="{{LP_lib::setActive(1,'thu-vien-hinh-anh','current')}}"><a href="{{route('f.getGallery')}}">Hình Ảnh</a></li>
+                                <li class=" dropdown"><a href="">Chi Nhánh</a>
+                                    @if(!$branch->isEmpty())
+                                        <ul>
+                                            @foreach($branch as $item_branch)
+                                                <li><a href="{{route('f.getChinhanh', $item_branch->id)}}">{!! $item_branch->title !!}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </li>
                                 <li class="{{LP_lib::setActive(1,'lien-he','current')}}"><a href="{{route('f.getLienhe')}}">Liên hệ</a></li>
                             </ul>
